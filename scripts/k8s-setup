@@ -1,0 +1,6 @@
+#!/bin/bash
+sudo bash -c "apt-get update; apt-get upgrade; apt-get install docker.io -y; systemctl start docker; systemctl enable docker; usermod -aG docker $USER"
+newgrp docker
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+sudo apt-get install kubeadm kubelet kubectl -y
