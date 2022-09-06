@@ -1,9 +1,0 @@
-#!/bin/bash
-
-sudo bash -c "apt-get update; apt-get upgrade"
-mkdir ~/.kube
-sudo bash -c "snap install microk8s --classic; snap install multipass; usermod -a -G microk8s $USER; chown -f -R $USER ~/.kube; microk8s enable gpu metallb dashboard prometheus ha-cluster prometheus"
-echo "alias k='microk8s kubectl'" >> ~/.bashrc
-echo "alias m='microk8s'" >> ~/.bashrc
-
-su - $USER

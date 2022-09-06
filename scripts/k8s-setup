@@ -1,6 +1,21 @@
 #!/bin/bash
-sudo bash -c "apt-get update; apt-get upgrade; apt-get install docker.io -y; systemctl start docker; systemctl enable docker; usermod -aG docker $USER"
+
+# docker & prereqs install & config
+sudo bash -c "apt-get install docker.io -y; systemctl start docker; systemctl enable docker; usermod -aG docker $USER"
 newgrp docker
+# kubectl/kubeadm/kubelet install
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
-sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get install kubeadm kubelet kubectl -y
+sudo swapoff -a
+# kubectl autocomplete
+source /usr/share/bash-completion/bash_completion
+echo 'source <(kubectl completion bash)' >>~/.bashrc; echo 'alias k=kubectl' >>~/.bashrc; echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+# restart bash
+exec bash
+# initialize the master node
+read -p "What is rhizome's IPv4:  " masterIP
+sudo kubeadm init --pod-network-cidr=${masterIP}/16
+
+chmod +x master-node-setup
+echo "initialize the worker nodes with the instructions above, then run 'master-node-setup' (the file)."
