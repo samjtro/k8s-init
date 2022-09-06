@@ -3,19 +3,20 @@
 # docker & prereqs install & config
 sudo bash -c "apt-get install docker.io -y; systemctl start docker; systemctl enable docker; usermod -aG docker $USER"
 newgrp docker
-# kubectl/kubeadm/kubelet install
+sudo bash -c "systemctl enable docker; systemctl daemon-reload; systemctl restart docker"
+# k8s install
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get install kubeadm kubelet kubectl -y
+# k8s config
 sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 # kubectl autocomplete
 source /usr/share/bash-completion/bash_completion
 echo 'source <(kubectl completion bash)' >>~/.bashrc; echo 'alias k=kubectl' >>~/.bashrc; echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 # restart bash
 exec bash
-# initialize the master node
-read -p "What is rhizome's IPv4:  " masterIP
-sudo kubeadm init --pod-network-cidr=${masterIP}/16
-
 chmod +x master-node-setup
-echo "initialize the worker nodes with the instructions above, then run 'master-node-setup' (the file)."
