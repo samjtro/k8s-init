@@ -1,5 +1,6 @@
 #!/bin/bash
 
+chmod +x ../master-node-setup
 sudo bash -c "apt-get update -y; apt-get upgrade; dpkg-reconfigure tzdata; apt-get install -y ca-certificates curl; snap install multipass"
 # init multipass VMs
 multipass launch --name rhizome --cpus 2 --mem 2048M --disk 20GB
