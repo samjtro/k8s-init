@@ -1,7 +1,7 @@
 #!/bin/bash
 
 read -p "What is rhizome's IPv4:  " masterIP
-IPADDR=${masterIP}
-NODENAME=$(hostname -s)
+export IPADDR=${masterIP}
+export NODENAME=$(hostname -s)
 sudo kubeadm init --pod-network-cidr=${masterIP}/16
 sudo kubectl apply -f 
