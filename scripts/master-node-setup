@@ -1,7 +1,9 @@
 #!/bin/bash
 
-read -p "What is rhizome's IPv4:  " masterIP
-export IPADDR=${masterIP}
+ipaddrU=$(hostname -I)
+ipaddr=${ipaddrU:0:13}
+export IPADDR=${ipaddr}
 export NODENAME=$(hostname -s)
-sudo kubeadm init --pod-network-cidr=${masterIP}/16
-sudo kubectl apply -f 
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O
+sudo kubeadm init --pod-network-cidr=${ipaddr}/16
+sudo kubectl apply -f calico.yaml
