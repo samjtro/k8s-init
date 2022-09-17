@@ -4,3 +4,4 @@
 multipass launch --name rhizome --cpus 2 --mem 2048M --disk 20GB
 multipass launch --name node1 --cpus 2 --mem 3072M --disk 60GB
 multipass launch --name node2 --cpus 2 --mem 3072M --disk 60GB
+echo "Now, utilize multipass shell <name> and run './node-setup' in each VM before running './master-node-setup' in the 'rhizome' VM."
