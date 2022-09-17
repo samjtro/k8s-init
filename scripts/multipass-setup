@@ -5,5 +5,5 @@ multipass launch --name rhizome --cpus 2 --mem 2048M --disk 20GB
 multipass launch --name node1 --cpus 2 --mem 3072M --disk 60GB
 multipass launch --name node2 --cpus 2 --mem 3072M --disk 60GB
 echo "Now, utilize multipass shell <name> for each new VM and run the following command in each VM:"
-echo "git clone https://raw.githubusercontent.com/samjtro/home-k8s/main/scripts/node-setup >> node-setup; chmod +x node-setup; ./node-setup"
+echo "curl https://raw.githubusercontent.com/samjtro/home-k8s/main/scripts/node-setup >> node-setup; chmod +x node-setup; ./node-setup"
 echo "Then, run './master-node-setup' in the 'rhizome' VM."
