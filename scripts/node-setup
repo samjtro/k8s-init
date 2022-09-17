@@ -13,17 +13,14 @@ sudo bash -c "apt-get update; apt-get install docker-ce docker-ce-cli containerd
 newgrp docker
 sudo bash -c "systemctl enable docker; systemctl daemon-reload; systemctl restart docker"
 # k8s install
-sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl
-sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+sudo bash -c "apt-get update -y; apt-get install -y apt-transport-https ca-certificates curl"
+curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get install kubeadm kubelet kubectl -y
 # k8s config
-sudo swapoff -a
-sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sudo bash -c "swapoff -a; sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab"
 mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+sudo bash -c "cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; chown $(id -u):$(id -g) $HOME/.kube/config"
 # kubectl autocomplete
 source /usr/share/bash-completion/bash_completion
 echo 'source <(kubectl completion bash)' >>~/.bashrc; echo 'alias k=kubectl' >>~/.bashrc; echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
