@@ -1,11 +1,16 @@
 #!/bin/bash
 
+# get IPv4
 ipaddrU=$(hostname -I)
 ipaddr=${ipaddrU:0:13}
+# export env variables
 export IPADDR=${ipaddr}
 export NODENAME=$(hostname -s)
-curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O
+# kubeadm init
 sudo kubeadm init --pod-network-cidr=${ipaddr}/16
+# networking init - i am using calico
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O
 sudo kubectl apply -f calico.yaml
+# post kubeadm init workflow
 mkdir -p $HOME/.kube
 sudo bash -c "cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; chown $(id -u):$(id -g) $HOME/.kube/config"

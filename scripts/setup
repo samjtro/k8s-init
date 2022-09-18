@@ -3,7 +3,7 @@
 chmod +x master-node-setup
 chmod +x node-setup
 chmod +x multipass-setup
-sudo bash -c "apt-get update -y; apt-get upgrade; dpkg-reconfigure tzdata; apt-get install -y ca-certificates curl; snap install multipass"
+sudo bash -c "apt-get update -y; apt-get upgrade; dpkg-reconfigure tzdata; apt-get install -y ca-certificates curl gnupg lsb-release; snap install multipass"
 # restart bash
 exec bash
 echo "Please restart the host PC. Then, run './multipass-setup'"
