@@ -20,8 +20,6 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 sudo bash -c "apt-get update -y; sudo apt-get install kubeadm kubelet kubectl -y"
 # k8s config
 sudo bash -c "swapoff -a; sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab"
-mkdir -p $HOME/.kube
-sudo bash -c "cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; chown $(id -u):$(id -g) $HOME/.kube/config"
 # kubectl autocomplete
 source /usr/share/bash-completion/bash_completion
 echo 'source <(kubectl completion bash)' >>~/.bashrc; echo 'alias k=kubectl' >>~/.bashrc; echo 'complete -o default -F __start_kubectl k' >>~/.bashrc

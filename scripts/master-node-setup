@@ -7,3 +7,5 @@ export NODENAME=$(hostname -s)
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O
 sudo kubeadm init --pod-network-cidr=${ipaddr}/16
 sudo kubectl apply -f calico.yaml
+mkdir -p $HOME/.kube
+sudo bash -c "cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; chown $(id -u):$(id -g) $HOME/.kube/config"
