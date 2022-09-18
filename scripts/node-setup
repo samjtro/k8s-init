@@ -9,9 +9,8 @@ sudo mkdir -p /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # docker & prereqs install & config
-sudo bash -c "apt-get update; apt-get install docker.io containerd.io -y; service docker start; systemctl enable docker; usermod -aG docker $USER"
-newgrp docker
-sudo bash -c "systemctl enable docker; systemctl daemon-reload; systemctl restart docker"
+sudo bash -c "apt-get update; apt-get install docker.io containerd.io -y"
+sudo bash -c "systemctl enable docker; systemctl daemon-reload; systemctl restart docker; usermod -aG docker $USER"
 # k8s install
 sudo bash -c "apt-get update -y; apt-get install -y apt-transport-https ca-certificates curl"
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
