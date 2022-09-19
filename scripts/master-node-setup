@@ -15,7 +15,8 @@ exit
 sudo kubeadm init --pod-network-cidr=${ipaddr}/16
 # cni add-on; using calico
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O
-sudo kubectl apply -f calico.yaml
+kubectl apply -f calico.yaml
 # post kubeadm init workflow
 mkdir -p $HOME/.kube
-sudo bash -c "cp -i /etc/kubernetes/admin.conf $HOME/.kube/config; chown $(id -u):$(id -g) $HOME/.kube/config"
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
