@@ -19,3 +19,8 @@ source /usr/share/bash-completion/bash_completion
 echo 'source <(kubectl completion bash)' >> ~/.bashrc; echo 'alias k=kubectl' >> ~/.bashrc; echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 # restart bash
 exec bash
+# error fix; see issue #4581 @ github.com/containerd/containerd
+sudo su
+rm /etc/containerd/config.toml
+systemctl restart containerd
+exit

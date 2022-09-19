@@ -6,11 +6,6 @@ ipaddr=${ipaddrU:0:13}
 # export env variables
 export IPADDR=${ipaddr}
 export NODENAME=$(hostname -s)
-# error fix; see issue #4581 @ github.com/containerd/containerd
-sudo su
-rm /etc/containerd/config.toml
-systemctl restart containerd
-exit
 # kubeadm init
 sudo kubeadm init --pod-network-cidr=${ipaddr}/16
 # cni add-on; using calico
