@@ -1,18 +1,17 @@
 #!/bin/bash
 
 # docker install
+sudo apt-get remove docker docker-engine docker.io containerd runc
 sudo mkdir -p /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo \ 
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \ 
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo bash -c "apt-get update -y; apt-get install docker.io containerd.io -y"
-sudo bash -c "systemctl enable docker; systemctl daemon-reload; systemctl start docker; usermod -aG docker $USER"
+sudo bash -c "apt-get update -y; apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y"
 # k8s install
-sudo bash -c "apt-get update -y; apt-get install -y apt-transport-https ca-certificates curl"
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo bash -c "apt-get update -y; apt-get install kubeadm kubelet kubectl -y"
+sudo bash -c "apt-get update -y; apt-get install kubeadm kubelet kubectl -y; apt-mark hold kubelet kubeadm kubectl"
 # k8s config
 sudo bash -c "swapoff -a; sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab"
 # kubectl autocomplete

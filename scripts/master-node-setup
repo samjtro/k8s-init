@@ -8,7 +8,7 @@ export IPADDR=${ipaddr}
 export NODENAME=$(hostname -s)
 # kubeadm init
 sudo kubeadm init --pod-network-cidr=${ipaddr}/16
-# networking init - i am using calico
+# cni add-on; using calico
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O
 sudo kubectl apply -f calico.yaml
 # post kubeadm init workflow
