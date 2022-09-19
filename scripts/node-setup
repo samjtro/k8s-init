@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # docker install
-sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo bash -c "apt-get update -y; apt-get upgrade -y; apt-get remove docker docker-engine docker.io containerd runc; apt-get install ca-certificates curl gnupg lsb-release apt-transport-https -y"
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
