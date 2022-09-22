@@ -4,6 +4,7 @@ chmod +x master-node-setup
 chmod +x node-setup
 chmod +x multipass-setup
 sudo bash -c "snap install multipass"
+
 # restart bash
 exec bash
 echo "Please restart the host PC. Then, run './multipass-setup'"
