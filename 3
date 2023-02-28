@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# init multipass VMs
+multipass launch --name rhizome --cpus 2 --mem 2048M --disk 20GB
+multipass launch --name node1 --cpus 2 --mem 3072M --disk 60GB
+multipass launch --name node2 --cpus 2 --mem 3072M --disk 60GB
+
+# instruction set
+echo "You now have three VMs running through Multipass; rhizome, the control plane; & then node1 & node2, both worker nodes designed for deployments."
+echo "Now, utilize multipass shell <name> for each new VM and run the following command within each VM:"
+echo "chmod +x node-init; ./node-init"
+echo "Then, utilize multipass shell rhizome to enter into the rhizome VM (control plane) and enter the following command:"
+echo "chmod +x rhizome-init; ./rhizome-init"
+echo "After that is done, copy the command given by kubadm pertaining to joining the cluster, and from each worker node run it."

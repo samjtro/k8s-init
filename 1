@@ -1,0 +1,6 @@
+#!/bin/bash
+sudo bash -c "ufw allow OpenSSH && ufw enable && ufw status"
+sudo bash -c "apt-get update && apt-get upgrade && apt-get install vim sudo curl git golang-go build-essentials"
+./2
+
+sudo reboot
