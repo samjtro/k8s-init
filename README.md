@@ -1,3 +1,11 @@
-# home-k8s
+# k8s-init
 
-This repo is a guided install of k8s on-prem using kubeadm. It's purpose is for use in [homelab](https://github.com/samjtro/homelab), in order to create clusters at-home in a similar environment to which you might see at a production level. This means cutting out all of the fluff most other home k8s variants include. The goal of this project is to sharpen my skills with k8s by managing a cluster at home, and I will be adding more to this repo as I continue adding more utilities, scripts & yaml files.
+From 0 to an on-prem k8s instance. At the moment, scripts deploy Multipass VMs on which Ctrl Plane + Kubelets are housed. Using Calico as a CNI-addon, everything else is just straight kubernetes. 
+
+'''Architecture diagram:
+Rhizome (ctrl-plane)
+^               ^
+|               |
+Node1(kubelet) Node2(kubelet)'''
+
+You can add extra VMs for more kubelets, if neccesary. This project is supposed to be as pure, barebones of an install as possible. Again, the goal is for it to be modular. 
