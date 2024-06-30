@@ -1,6 +1,7 @@
 #!/bin/bash
-sudo bash -c "ufw allow OpenSSH && ufw enable && ufw status"
-sudo bash -c "apt-get update && apt-get upgrade && apt-get install vim sudo curl git golang-go build-essentials"
+sudo bash -c "ufw allow OpenSSH; ufw enable; ufw status"
+sudo bash -c "apt-get update; apt-get upgrade; apt-get install vim sudo curl git golang-go build-essentials"
+chmod +x 2 3 node-init rhizome-init
 ./2
 
 sudo reboot
