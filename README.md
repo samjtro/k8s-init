@@ -1,13 +1,11 @@
 # k8s-init
 
-From 0 to an on-prem k8s instance. At the moment, scripts deploy Multipass VMs on which Ctrl Plane + Kubelets are housed. Using Calico as a CNI-addon, everything else is just straight kubernetes. 
+from 0 to a k8s installation on a fresh ubuntu server instance. scripts deploy 3 multipass VMs on which ctrl plane + kubelets are housed. native k8s with the exception of calico for cni.
 
-Architecture diagram:
+architecture:
 ```
 Rhizome (ctrl-plane)
 ^               ^
 |               |
 Node1(kubelet) Node2(kubelet)
 ```
-
-You can add extra VMs for more kubelets, if neccesary. This project is supposed to be as pure, barebones of an install as possible. Again, the goal is for it to be modular. 
